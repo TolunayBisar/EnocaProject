@@ -2,6 +2,7 @@ package com.enoca.ecommercetest.page;
 
 import com.enoca.ecommercetest.utility.BaseClass;
 import com.enoca.ecommercetest.utility.FunctionLibrary;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -25,7 +26,7 @@ public class AddToCartPage extends BaseClass {
     Actions actions ;
     @FindBy(xpath = "//select[@id=\"products-orderby\"]")
     WebElement dropDownSiralama;
-    @FindAll(@FindBy(xpath = "//div[@id=\"cl-product-grid\"]/div"))
+    @FindAll(@FindBy(xpath = "//div[@id=\"cl-product-grid\"]//div//a[@class=\"cl-product-images\"]"))
     List<WebElement> listOfItem;
     @FindBy(xpath = "//select[@id='size-select']")
     WebElement dropDownBedensec;
@@ -33,6 +34,7 @@ public class AddToCartPage extends BaseClass {
     List<WebElement> listBeden;
     @FindAll(@FindBy(xpath = "//span[text()=\"Stoğa Gelince Haber Ver\"]"))
     List<WebElement> listStogaGelinceHaberVer;
+
     @FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]")
     WebElement buttonSepetEkle;
     @FindBy(xpath = "//a[@class=\"cl-product-card-title\"]")
@@ -60,19 +62,24 @@ public class AddToCartPage extends BaseClass {
         Select select= new Select(dropDownSiralama);
         select.selectByVisibleText("Fiyata Göre (Artan)");
         functionLibrary.sleep(5);
-        //functionLibrary.waitForElementPresent(listOfItem.get(0));
-        listOfItem.get(0).click();
+        functionLibrary.waitForElementPresent(listOfItem.get(0));
+        actions.click(listOfItem.get(0));
+        //listOfItem.get(0).click();
 
         functionLibrary.waitForElementPresent(dropDownBedensec);
         //dropDownBedensec.click();
         actions.click(dropDownBedensec);
         Select select1= new Select(dropDownBedensec);
+        int i = random.nextInt(listBeden.size());
         do {
-            select1.selectByIndex(random.nextInt(listBeden.size()));
 
-        }while (listStogaGelinceHaberVer.get(0).isEnabled());
+            select1.selectByIndex(i);
+
+        }while (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver"));
         functionLibrary.waitForElementPresent(buttonSepetEkle);
-        buttonSepetEkle.click();
+
+       // buttonSepetEkle.click();
+        actions.click(buttonSepetEkle);
 
     }
     public boolean verifyAddToCart(){

@@ -1,6 +1,7 @@
 package com.enoca.ecommercetest.utility;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @Email :tolunay.bisar@gmail.com
 **/public class BaseClass {
     public static WebDriver driver;
+
     public void setUpBrowser(String url) {
         ChromeOptions options = new ChromeOptions();
 //        WebDriverManager.chromedriver().setup();
@@ -29,11 +31,15 @@ import java.util.Map;
         driver= new ChromeDriver(options);
         if (SystemUtils.IS_OS_MAC_OSX||SystemUtils.IS_OS_WINDOWS) {
             driver.manage().window().maximize();
-            driver.manage().deleteAllCookies();
+
+
         }
 
         driver.get(url);
+        driver.manage().deleteAllCookies();
     }
+
+
 
     public static void closeBrowser() {
 
