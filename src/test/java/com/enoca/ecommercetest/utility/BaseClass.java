@@ -29,6 +29,7 @@ import java.util.Map;
         driver= new ChromeDriver(options);
         if (SystemUtils.IS_OS_MAC_OSX||SystemUtils.IS_OS_WINDOWS) {
             driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
         }
 
         driver.get(url);
