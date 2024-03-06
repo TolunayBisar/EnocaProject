@@ -1,6 +1,7 @@
 package com.enoca.ecommercetest.utility;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -41,12 +42,25 @@ public class FunctionLibrary extends BaseClass{
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForElementPresent1(WebElement element){
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(
+                readFromConfig("config.properties","timeout"))));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
     public void sleep(int seconds){
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    public void javaScripClick(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click()",element);
 
     }
 

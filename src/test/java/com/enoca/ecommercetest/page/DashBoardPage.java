@@ -36,7 +36,7 @@ WebElement linkSepetim;
         linkOfHesabim.click();
     }
     public void openSepetim(){
-        functionLibrary.waitForElementPresent(linkSepetim);
+        functionLibrary.waitForElementPresent1(linkSepetim);
         linkSepetim.click();
     }
 

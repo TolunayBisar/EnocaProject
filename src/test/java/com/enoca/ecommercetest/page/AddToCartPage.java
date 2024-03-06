@@ -24,6 +24,7 @@ public class AddToCartPage extends BaseClass {
     DashBoardPage dashBoardPage;
     Random random = new Random();
     Actions actions ;
+
     @FindBy(xpath = "//select[@id=\"products-orderby\"]")
     WebElement dropDownSiralama;
     @FindAll(@FindBy(xpath = "//div[@id=\"cl-product-grid\"]//div//a[@class=\"cl-product-images\"]"))
@@ -46,6 +47,8 @@ public class AddToCartPage extends BaseClass {
     @FindBy(xpath = "//p[@class=\"cl-product-price\"]/span")
     WebElement priceInSepetEkle;
 
+    String itemNameInSepetEkle ;
+    String itemPriceInSepetEkle ;
 
 
 
@@ -62,9 +65,9 @@ public class AddToCartPage extends BaseClass {
         Select select= new Select(dropDownSiralama);
         select.selectByVisibleText("Fiyata Göre (Artan)");
         functionLibrary.sleep(5);
-        functionLibrary.waitForElementPresent(listOfItem.get(0));
-        actions.click(listOfItem.get(0));
-        //listOfItem.get(0).click();
+        functionLibrary.waitForElementPresent1(listOfItem.get(0));
+        //actions.click(listOfItem.get(0));
+        listOfItem.get(0).click();
 
         functionLibrary.waitForElementPresent(dropDownBedensec);
         //dropDownBedensec.click();
@@ -72,14 +75,17 @@ public class AddToCartPage extends BaseClass {
         Select select1= new Select(dropDownBedensec);
         int i = random.nextInt(listBeden.size());
         do {
-
-            select1.selectByIndex(i);
+            i++;
+            select1.selectByIndex(i+1);
 
         }while (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver"));
-        functionLibrary.waitForElementPresent(buttonSepetEkle);
+         itemNameInSepetEkle = itemInSepetEkle.getText();
+         itemPriceInSepetEkle = priceInSepetEkle.getText();
+        functionLibrary.waitForElementPresent1(buttonSepetEkle);
 
-       // buttonSepetEkle.click();
-        actions.click(buttonSepetEkle);
+        //buttonSepetEkle.click();
+        //actions.click(buttonSepetEkle);
+        functionLibrary.javaScripClick(buttonSepetEkle);
 
     }
     public boolean verifyAddToCart(){
@@ -87,8 +93,7 @@ public class AddToCartPage extends BaseClass {
         functionLibrary.waitForElementPresent(itemInSepet);
         String itemNameInSepet = itemInSepet.getText();
         String itemPriceInSepet = priceInSepet.getText();
-        String itemNameInSepetEkle = itemInSepetEkle.getText();
-        String itemPriceInSepetEkle = priceInSepetEkle.getText();
+
         return itemNameInSepet.equalsIgnoreCase(itemNameInSepetEkle)
                 &&itemPriceInSepet.equalsIgnoreCase(itemPriceInSepetEkle);
 

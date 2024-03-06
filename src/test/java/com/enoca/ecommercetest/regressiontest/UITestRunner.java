@@ -67,7 +67,7 @@ public class UITestRunner extends BaseClass {
         myCartPage.openShoppingPage();
         dashBoardPage.clickTabOnDashBoard();
         addToCartPage.addToCart();
-        //Assert.assertTrue(addToCartPage.verifyAddToCart());
+        Assert.assertTrue(addToCartPage.verifyAddToCart());
 
     }
 
