@@ -32,7 +32,7 @@ WebElement linkSepetim;
 
     }
     public void openLoginPage(){
-        functionLibrary.waitForElementPresent(linkOfHesabim);
+        functionLibrary.waitForElementPresent1(linkOfHesabim);
         linkOfHesabim.click();
     }
     public void openSepetim(){

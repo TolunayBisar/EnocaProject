@@ -19,6 +19,7 @@ public class UITestRunner extends BaseClass {
     LoginPage loginPage;
     MyCartPage myCartPage;
     AddToCartPage addToCartPage;
+    CheckOutPage checkOutPage;
 
 
     @BeforeClass
@@ -30,6 +31,7 @@ public class UITestRunner extends BaseClass {
         loginPage = new LoginPage(driver);
         myCartPage = new MyCartPage(driver);
         addToCartPage = new AddToCartPage(driver);
+        checkOutPage = new CheckOutPage(driver);
     }
 
 
@@ -62,7 +64,7 @@ public class UITestRunner extends BaseClass {
         Assert.assertTrue(myCartPage.verifySepetimEmpity());
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4,dependsOnMethods = "logIn")
     public void addToCart(){
         myCartPage.openShoppingPage();
         dashBoardPage.clickTabOnDashBoard();
@@ -70,7 +72,12 @@ public class UITestRunner extends BaseClass {
         Assert.assertTrue(addToCartPage.verifyAddToCart());
 
     }
+@Test(priority = 5,dependsOnMethods ="addToCart" )
+public void checkOut(){
+        checkOutPage.checkOut();
 
+
+}
 
     @AfterClass(enabled = false)
     public void tearDown() {

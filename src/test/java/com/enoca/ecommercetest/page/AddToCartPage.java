@@ -38,6 +38,9 @@ public class AddToCartPage extends BaseClass {
 
     @FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]")
     WebElement buttonSepetEkle;
+
+    @FindBy(xpath = "//div[@id=\"cl-fancy-added-to-cart\"]/div[@onclick=\"javascript:location.href='/cart'\"]")
+    WebElement buttonSepetGit;
     @FindBy(xpath = "//a[@class=\"cl-product-card-title\"]")
     WebElement itemInSepet;
     @FindBy(xpath = "//span[@class=\"cl-product-price\"]")
@@ -46,6 +49,8 @@ public class AddToCartPage extends BaseClass {
     WebElement itemInSepetEkle;
     @FindBy(xpath = "//p[@class=\"cl-product-price\"]/span")
     WebElement priceInSepetEkle;
+
+
 
     String itemNameInSepetEkle ;
     String itemPriceInSepetEkle ;
@@ -67,13 +72,14 @@ public class AddToCartPage extends BaseClass {
         functionLibrary.sleep(5);
         functionLibrary.waitForElementPresent1(listOfItem.get(0));
         //actions.click(listOfItem.get(0));
-        listOfItem.get(0).click();
+        //listOfItem.get(0).click();
+        functionLibrary.javaScripClick(listOfItem.get(0));
 
-        functionLibrary.waitForElementPresent(dropDownBedensec);
+        functionLibrary.waitForElementPresent1(dropDownBedensec);
         //dropDownBedensec.click();
         actions.click(dropDownBedensec);
         Select select1= new Select(dropDownBedensec);
-        int i = random.nextInt(listBeden.size());
+        int i = random.nextInt(listBeden.size()-2);
         do {
             i++;
             select1.selectByIndex(i+1);
@@ -86,10 +92,12 @@ public class AddToCartPage extends BaseClass {
         //buttonSepetEkle.click();
         //actions.click(buttonSepetEkle);
         functionLibrary.javaScripClick(buttonSepetEkle);
+        functionLibrary.waitForElementPresent(buttonSepetGit);
+        buttonSepetGit.click();
 
     }
     public boolean verifyAddToCart(){
-        dashBoardPage.openSepetim();
+        //dashBoardPage.openSepetim();
         functionLibrary.waitForElementPresent(itemInSepet);
         String itemNameInSepet = itemInSepet.getText();
         String itemPriceInSepet = priceInSepet.getText();

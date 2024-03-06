@@ -1,5 +1,6 @@
 package com.enoca.ecommercetest.utility;
 
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -74,6 +75,15 @@ public class FunctionLibrary extends BaseClass{
         String randomText = RandomStringUtils.randomAlphabetic(4);
         return randomText;
 
+    }
+
+    public String generateFakeName(){
+        String fakeName = Faker.instance().name().firstName();
+        return fakeName;
+    }
+    public String generateFakerCartNo(){
+        String creditCartNo = Faker.instance().finance().creditCard();
+        return creditCartNo;
     }
 
 

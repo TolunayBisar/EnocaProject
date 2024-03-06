@@ -37,13 +37,16 @@ public class MyCartPage extends BaseClass {
     public void clearSepetim(){
         dashBoardPage.openSepetim();
         functionLibrary.waitForElementPresent(labelSepet);
-        if (listOfDeleteButton.size()>0){
-            for (int i=0;i<listOfDeleteButton.size();i++){
-                listOfDeleteButton.get(i).click();
+
+        while (listOfDeleteButton.size()>0){
+            functionLibrary.waitForElementPresent1(listOfDeleteButton.get(0));
+
+                listOfDeleteButton.get(0).click();
                 functionLibrary.waitForElementPresent(buttonSil);
                 buttonSil.click();
+
             }
-        }
+
     }
     public boolean verifySepetimEmpity(){
          functionLibrary.waitForElementPresent(labelSepetBos);
