@@ -20,6 +20,7 @@ public class UITestRunner extends BaseClass {
     MyCartPage myCartPage;
     AddToCartPage addToCartPage;
     CheckOutPage checkOutPage;
+    LogOutPage logOutPage;
 
 
     @BeforeClass
@@ -32,6 +33,7 @@ public class UITestRunner extends BaseClass {
         myCartPage = new MyCartPage(driver);
         addToCartPage = new AddToCartPage(driver);
         checkOutPage = new CheckOutPage(driver);
+        logOutPage = new LogOutPage(driver);
     }
 
 
@@ -52,7 +54,8 @@ public class UITestRunner extends BaseClass {
 
     @Test(priority = 2)
     public void logIn() {
-        dashBoardPage.openLoginPage();
+        dashBoardPage.closeCookie();
+        dashBoardPage.openHesabim();
         loginPage.logIn();
         Assert.assertTrue(loginPage.verifyLogin());
 
@@ -66,7 +69,7 @@ public class UITestRunner extends BaseClass {
 
     @Test(priority = 4,dependsOnMethods = "logIn")
     public void addToCart(){
-        myCartPage.openShoppingPage();
+        //myCartPage.openShoppingPage();
         dashBoardPage.clickTabOnDashBoard();
         addToCartPage.addToCart();
         Assert.assertTrue(addToCartPage.verifyAddToCart());
@@ -78,6 +81,30 @@ public void checkOut(){
 
 
 }
+@Test(priority = 6,dependsOnMethods = "checkOut")
+public void verifyCheckOut(){
+        checkOutPage.verifyCheckOut();
+
+}
+@Test(priority = 7)
+public void addItemQtyInCart(){
+        myCartPage.addItemInCart();
+}
+
+@Test(priority = 8,dependsOnMethods = "addItemQtyInCart")
+public void verifyAddItemQtyInCart(){
+        myCartPage.verifyItemAddedInCart();
+}
+@Test(priority =9,dependsOnMethods = "logIn")
+public void logOut(){
+        logOutPage.logOut();
+
+}
+@Test(priority = 10,dependsOnMethods = "logOut")
+public void verifyLogOut(){
+        logOutPage.verifyLogOut();
+}
+
 
     @AfterClass(enabled = false)
     public void tearDown() {

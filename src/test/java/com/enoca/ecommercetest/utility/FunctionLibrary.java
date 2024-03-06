@@ -43,12 +43,20 @@ public class FunctionLibrary extends BaseClass{
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForElementPresent1(WebElement element){
+    public void waitForElementPresentClick(WebElement element){
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(
                 readFromConfig("config.properties","timeout"))));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public void waitForElementPresentSelect(WebElement element){
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(
+                readFromConfig("config.properties","timeout"))));
+        wait.until(ExpectedConditions.elementToBeSelected(element));
+    }
+
 
     public void sleep(int seconds){
         try {

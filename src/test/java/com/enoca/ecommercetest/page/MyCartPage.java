@@ -18,6 +18,8 @@ import java.util.List;
 public class MyCartPage extends BaseClass {
     FunctionLibrary functionLibrary;
     DashBoardPage dashBoardPage;
+    CheckOutPage checkOutPage;
+    String qtyBeforeAdd;
     @FindAll(@FindBy(xpath = "//button[@onclick=\"deleteItemClick($(this))\"]"))
     List<WebElement> listOfDeleteButton;
     @FindBy(xpath = "//span[text()=\"Sepetim\"]")
@@ -28,18 +30,24 @@ public class MyCartPage extends BaseClass {
     WebElement labelSepetBos;
     @FindBy(xpath = "//button[@onclick=\"setLocation('/')\"]")
     WebElement buttonAlisverisBaslat;
+    @FindBy(xpath = "//div[@class=\"cl-input-plus-button\"]")
+    WebElement buttonArti;
+    @FindBy(xpath = "//input[@class=\"cl-product-quantity-input\"]")
+    WebElement qtyOfItem;
+
 
     public MyCartPage(WebDriver driver) {
         PageFactory.initElements(driver,this);
         functionLibrary= new FunctionLibrary();
         dashBoardPage = new DashBoardPage(driver);
+        checkOutPage= new CheckOutPage(driver);
     }
     public void clearSepetim(){
         dashBoardPage.openSepetim();
         functionLibrary.waitForElementPresent(labelSepet);
 
         while (listOfDeleteButton.size()>0){
-            functionLibrary.waitForElementPresent1(listOfDeleteButton.get(0));
+            functionLibrary.waitForElementPresentClick(listOfDeleteButton.get(0));
 
                 listOfDeleteButton.get(0).click();
                 functionLibrary.waitForElementPresent(buttonSil);
@@ -56,6 +64,22 @@ public class MyCartPage extends BaseClass {
     public void openShoppingPage(){
         functionLibrary.waitForElementPresent(buttonAlisverisBaslat);
         buttonAlisverisBaslat.click();
+
+    }
+    public String addItemInCart(){
+        checkOutPage.closeWarningAlert();
+        dashBoardPage.openSepetim();
+        functionLibrary.waitForElementPresent(qtyOfItem);
+        qtyBeforeAdd= qtyOfItem.getAttribute("value");
+        functionLibrary.waitForElementPresentClick(buttonArti);
+        buttonArti.click();
+        return qtyBeforeAdd;
+    }
+    public boolean verifyItemAddedInCart(){
+        MyCartPage myCart= new MyCartPage(driver);
+       functionLibrary.waitForElementPresent(qtyOfItem);
+       String qtyAfterAdd= qtyOfItem.getAttribute("value");
+       return qtyAfterAdd.equalsIgnoreCase(qtyBeforeAdd);
 
     }
 }

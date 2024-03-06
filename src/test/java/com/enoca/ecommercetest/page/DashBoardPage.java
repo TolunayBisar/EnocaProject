@@ -25,18 +25,26 @@ public class DashBoardPage extends BaseClass {
     WebElement linkOfHesabim;
 @FindBy(xpath = "//img[@title=\"Sepetim\"]")
 WebElement linkSepetim;
+@FindBy(id = "onetrust-accept-btn-handler")
+WebElement buttonKabulEt;
 
     public DashBoardPage(WebDriver driver) {
         functionLibrary= new FunctionLibrary();
         PageFactory.initElements(driver,this);
 
     }
-    public void openLoginPage(){
-        functionLibrary.waitForElementPresent1(linkOfHesabim);
+
+    public void closeCookie(){
+        functionLibrary.waitForElementPresentClick(buttonKabulEt);
+        buttonKabulEt.click();
+
+    }
+    public void openHesabim(){
+        functionLibrary.waitForElementPresentClick(linkOfHesabim);
         linkOfHesabim.click();
     }
     public void openSepetim(){
-        functionLibrary.waitForElementPresent1(linkSepetim);
+        functionLibrary.waitForElementPresentClick(linkSepetim);
         linkSepetim.click();
     }
 

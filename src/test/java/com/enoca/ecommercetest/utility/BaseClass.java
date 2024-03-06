@@ -36,7 +36,7 @@ import java.util.Map;
         }
 
         driver.get(url);
-        driver.manage().deleteAllCookies();
+
     }
 
 

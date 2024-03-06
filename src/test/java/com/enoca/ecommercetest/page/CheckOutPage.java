@@ -70,6 +70,8 @@ WebElement inputCodeCVV;
 WebElement buttonSiparişTamamla;
 @FindBy(xpath = "//p[text()=\"Ödeminizi tamamlamak için lütfen Üyelik Sözleşmesini onaylayın. Teşekkürler!\"]")
 WebElement uyariMsg;
+    @FindBy(css = "path[d=\"M10,10 L22,22 M22,10 L10,22\"]")
+    WebElement linkCloseIcon;
 
 
     public CheckOutPage(WebDriver driver) {
@@ -79,18 +81,18 @@ WebElement uyariMsg;
     }
 
     public void checkOut(){
-        functionLibrary.waitForElementPresent(checkBoxHediyePaket);
+        functionLibrary.waitForElementPresentClick(checkBoxHediyePaket);
         checkBoxHediyePaket.click();
         functionLibrary.waitForElementPresent(inputPromosyonKod);
         inputPromosyonKod.sendKeys(functionLibrary.timeStamp());
-        functionLibrary.waitForElementPresent1(buttonUygula);
+        functionLibrary.waitForElementPresentClick(buttonUygula);
         buttonUygula.click();
         String hataliMsg= hataMsg.getText();
         System.out.println(hataliMsg);
-        functionLibrary.waitForElementPresent1(buttonSatinAl);
+        functionLibrary.waitForElementPresentClick(buttonSatinAl);
         //buttonSatinAl.click();
         functionLibrary.javaScripClick(buttonSatinAl);
-        functionLibrary.waitForElementPresent1(buttonYeniAdresEkle);
+        functionLibrary.waitForElementPresentClick(buttonYeniAdresEkle);
         buttonYeniAdresEkle.click();
         functionLibrary.waitForElementPresent(inputAdresKolayAdi);
         inputAdresKolayAdi.sendKeys("zeynep"+functionLibrary.timeStamp());
@@ -107,11 +109,11 @@ WebElement uyariMsg;
         inputAdres1.sendKeys(functionLibrary.randomText()+functionLibrary.randomText());
         functionLibrary.waitForElementPresent(inputAdres2);
         inputAdres2.sendKeys(functionLibrary.randomText()+functionLibrary.randomText());
-        functionLibrary.waitForElementPresent1(buttonKayıtOl);
+        functionLibrary.waitForElementPresentClick(buttonKayıtOl);
        // buttonKayıtOl.click();
         functionLibrary.javaScripClick(buttonKayıtOl);
 
-        functionLibrary.waitForElementPresent1(buttonDevamEt);
+        functionLibrary.waitForElementPresentClick(buttonDevamEt);
        // buttonDevamEt.click();
         functionLibrary.javaScripClick(buttonDevamEt);
         functionLibrary.waitForElementPresent(inputHolderName);
@@ -120,10 +122,20 @@ WebElement uyariMsg;
         inputCartNo.sendKeys(functionLibrary.generateFakerCartNo());
         functionLibrary.waitForElementPresent(inputCodeCVV);
         inputCodeCVV.sendKeys(functionLibrary.timeStamp());
-        functionLibrary.waitForElementPresent1(buttonSiparişTamamla);
+        functionLibrary.waitForElementPresentClick(buttonSiparişTamamla);
 buttonSiparişTamamla.click();
 functionLibrary.waitForElementPresent(uyariMsg);
 String uyari = uyariMsg.getText();
         System.out.println(uyari);
+
+    }
+    public boolean verifyCheckOut(){
+        return uyariMsg.getText().equalsIgnoreCase("Ödeminizi " +
+                "tamamlamak için lütfen Üyelik Sözleşmesini onaylayın. Teşekkürler!");
+    }
+
+    public void closeWarningAlert(){
+        functionLibrary.waitForElementPresentClick(linkCloseIcon);
+        linkCloseIcon.click();
     }
 }

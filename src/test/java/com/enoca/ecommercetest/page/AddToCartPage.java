@@ -2,7 +2,6 @@ package com.enoca.ecommercetest.page;
 
 import com.enoca.ecommercetest.utility.BaseClass;
 import com.enoca.ecommercetest.utility.FunctionLibrary;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -33,11 +32,11 @@ public class AddToCartPage extends BaseClass {
     WebElement dropDownBedensec;
     @FindAll(@FindBy(xpath = "//select[@id=\"size-select\"]/option[contains(@id,\"product\")]"))
     List<WebElement> listBeden;
-    @FindAll(@FindBy(xpath = "//span[text()=\"Stoğa Gelince Haber Ver\"]"))
-    List<WebElement> listStogaGelinceHaberVer;
+    @FindBy(xpath = "//span[text()=\"Stoğa Gelince Haber Ver\"]")
+    WebElement buttonStogaGelinceHaberVer;
 
-    @FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]")
-    WebElement buttonSepetEkle;
+   @FindAll(@FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]"))
+    List<WebElement> buttonSepetEkle;
 
     @FindBy(xpath = "//div[@id=\"cl-fancy-added-to-cart\"]/div[@onclick=\"javascript:location.href='/cart'\"]")
     WebElement buttonSepetGit;
@@ -70,32 +69,39 @@ public class AddToCartPage extends BaseClass {
         Select select= new Select(dropDownSiralama);
         select.selectByVisibleText("Fiyata Göre (Artan)");
         functionLibrary.sleep(5);
-        functionLibrary.waitForElementPresent1(listOfItem.get(0));
+        functionLibrary.waitForElementPresentClick(listOfItem.get(0));
         //actions.click(listOfItem.get(0));
         //listOfItem.get(0).click();
         functionLibrary.javaScripClick(listOfItem.get(0));
 
-        functionLibrary.waitForElementPresent1(dropDownBedensec);
+        functionLibrary.waitForElementPresentClick(dropDownBedensec);
         //dropDownBedensec.click();
-        actions.click(dropDownBedensec);
+        //actions.click(dropDownBedensec);
+        functionLibrary.javaScripClick(dropDownBedensec);
         Select select1= new Select(dropDownBedensec);
-        int i;
-        do {
-            i= random.nextInt(listBeden.size());
-            select1.selectByIndex(i);
-            if (i>=listBeden.size()){
-                i--;
-            }else i++;
+        for (int i=random.nextInt(listBeden.size());i< listBeden.size();i++)
+         {
+//             if (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver")) {
+//                 continue;
+//             }
+
+          functionLibrary.waitForElementPresent(listBeden.get(i));
+             System.out.println(listBeden.get(i));
+             select1.selectByIndex(i);
+             if (buttonSepetEkle.size()>0)
+                 break;
+
+
 
         }
-        while (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver"));
+
          itemNameInSepetEkle = itemInSepetEkle.getText();
          itemPriceInSepetEkle = priceInSepetEkle.getText();
-        functionLibrary.waitForElementPresent1(buttonSepetEkle);
+        functionLibrary.waitForElementPresentClick(buttonSepetEkle.get(0));
 
         //buttonSepetEkle.click();
         //actions.click(buttonSepetEkle);
-        functionLibrary.javaScripClick(buttonSepetEkle);
+        functionLibrary.javaScripClick(buttonSepetEkle.get(0));
         functionLibrary.waitForElementPresent(buttonSepetGit);
         buttonSepetGit.click();
 

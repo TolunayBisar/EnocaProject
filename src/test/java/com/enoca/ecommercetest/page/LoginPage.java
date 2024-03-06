@@ -38,7 +38,7 @@ public class LoginPage extends BaseClass {
         functionLibrary.waitForElementPresent(inputPassword);
         inputPassword.sendKeys(FunctionLibrary.readFromConfig("config.properties",
                 "password"));
-        functionLibrary.waitForElementPresent1(buttonGirisYap);
+        functionLibrary.waitForElementPresentClick(buttonGirisYap);
         //buttonGirisYap.click();
         functionLibrary.javaScripClick(buttonGirisYap);
 
