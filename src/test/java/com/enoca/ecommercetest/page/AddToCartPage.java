@@ -31,7 +31,7 @@ public class AddToCartPage extends BaseClass {
     List<WebElement> listOfItem;
     @FindBy(xpath = "//select[@id='size-select']")
     WebElement dropDownBedensec;
-    @FindAll(@FindBy(xpath = "//select[@id=\"size-select\"]/option"))
+    @FindAll(@FindBy(xpath = "//select[@id=\"size-select\"]/option[contains(@id,\"product\")]"))
     List<WebElement> listBeden;
     @FindAll(@FindBy(xpath = "//span[text()=\"Stoğa Gelince Haber Ver\"]"))
     List<WebElement> listStogaGelinceHaberVer;
@@ -79,12 +79,16 @@ public class AddToCartPage extends BaseClass {
         //dropDownBedensec.click();
         actions.click(dropDownBedensec);
         Select select1= new Select(dropDownBedensec);
-        int i = random.nextInt(listBeden.size()-2);
+        int i;
         do {
-            i++;
-            select1.selectByIndex(i+1);
+            i= random.nextInt(listBeden.size());
+            select1.selectByIndex(i);
+            if (i>=listBeden.size()){
+                i--;
+            }else i++;
 
-        }while (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver"));
+        }
+        while (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver"));
          itemNameInSepetEkle = itemInSepetEkle.getText();
          itemPriceInSepetEkle = priceInSepetEkle.getText();
         functionLibrary.waitForElementPresent1(buttonSepetEkle);
