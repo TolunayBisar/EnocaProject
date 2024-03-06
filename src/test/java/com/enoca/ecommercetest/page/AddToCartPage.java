@@ -79,14 +79,14 @@ public class AddToCartPage extends BaseClass {
         //actions.click(dropDownBedensec);
         functionLibrary.javaScripClick(dropDownBedensec);
         Select select1= new Select(dropDownBedensec);
-        for (int i=random.nextInt(listBeden.size());i< listBeden.size();i++)
+        for (int i=random.nextInt(listBeden.size());i>0&&i< listBeden.size();i++)
          {
 //             if (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver")) {
 //                 continue;
 //             }
 
-          functionLibrary.waitForElementPresent(listBeden.get(i));
-             System.out.println(listBeden.get(i));
+         // functionLibrary.waitForElementPresent(listBeden.get(i));
+             System.out.println(i);
              select1.selectByIndex(i);
              if (buttonSepetEkle.size()>0)
                  break;
@@ -102,7 +102,7 @@ public class AddToCartPage extends BaseClass {
         //buttonSepetEkle.click();
         //actions.click(buttonSepetEkle);
         functionLibrary.javaScripClick(buttonSepetEkle.get(0));
-        functionLibrary.waitForElementPresent(buttonSepetGit);
+        functionLibrary.waitForElementPresentClick(buttonSepetGit);
         buttonSepetGit.click();
 
     }

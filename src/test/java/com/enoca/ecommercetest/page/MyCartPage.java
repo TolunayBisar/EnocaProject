@@ -62,7 +62,7 @@ public class MyCartPage extends BaseClass {
 
     }
     public void openShoppingPage(){
-        functionLibrary.waitForElementPresent(buttonAlisverisBaslat);
+        functionLibrary.waitForElementPresentClick(buttonAlisverisBaslat);
         buttonAlisverisBaslat.click();
 
     }

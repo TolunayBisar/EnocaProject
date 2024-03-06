@@ -69,7 +69,7 @@ public class UITestRunner extends BaseClass {
 
     @Test(priority = 4,dependsOnMethods = "logIn")
     public void addToCart(){
-        //myCartPage.openShoppingPage();
+        myCartPage.openShoppingPage();
         dashBoardPage.clickTabOnDashBoard();
         addToCartPage.addToCart();
         Assert.assertTrue(addToCartPage.verifyAddToCart());
