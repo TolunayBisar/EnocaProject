@@ -68,3 +68,6 @@ replay_pid*
 /logs/
 
 /Downloads/
+/null/
+/screenshot/
+
