@@ -52,7 +52,8 @@ public class AddToCartPage extends BaseClass {
     @FindBy(xpath = "//div[text()=\"KOPYALA\"]")
             WebElement buttonIndirimKod;
 
-
+    @FindBy(xpath = "//span[@class=\"text\"]")
+    WebElement checkBoxHediyePaket;
 
     String itemNameInSepetEkle ;
     String itemPriceInSepetEkle ;
@@ -83,6 +84,7 @@ public class AddToCartPage extends BaseClass {
 
         for (int i=random.nextInt(listBeden.size());i>0&&i< listBeden.size();i++)
          {
+             functionLibrary.waitForElementPresent(dropDownBedensec);
              functionLibrary.javaScripClick(dropDownBedensec);
              Select select1= new Select(dropDownBedensec);
 
@@ -109,8 +111,12 @@ public class AddToCartPage extends BaseClass {
         functionLibrary.javaScripClick(buttonSepetEkle);
         functionLibrary.waitForElementPresentClick(buttonSepetGit);
         buttonSepetGit.click();
-        functionLibrary.waitForElementPresentClick(buttonIndirimKod);
-        buttonIndirimKod.click();
+        functionLibrary.waitForElementPresent(checkBoxHediyePaket);
+        checkBoxHediyePaket.click();
+        if (buttonIndirimKod.isDisplayed()) {
+            functionLibrary.waitForElementPresentClick(buttonIndirimKod);
+            buttonIndirimKod.click();
+        }
 
     }
     public boolean verifyAddToCart(){

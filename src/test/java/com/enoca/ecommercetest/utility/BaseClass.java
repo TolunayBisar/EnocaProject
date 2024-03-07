@@ -19,6 +19,8 @@ import java.util.Map;
 
     public void setUpBrowser(String url) {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-notifications");
+        options.addArguments("--enable-javascript");
 //        WebDriverManager.chromedriver().setup();
 
         if (SystemUtils.IS_OS_LINUX){

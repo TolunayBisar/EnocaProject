@@ -67,7 +67,7 @@ public class MyCartPage extends BaseClass {
 
     }
     public String addItemInCart(){
-        checkOutPage.closeWarningAlert();
+        //checkOutPage.closeWarningAlert();
         dashBoardPage.openSepetim();
         functionLibrary.waitForElementPresent(qtyOfItem);
         qtyBeforeAdd= qtyOfItem.getAttribute("value");
