@@ -57,6 +57,13 @@ public class FunctionLibrary extends BaseClass{
         wait.until(ExpectedConditions.elementToBeSelected(element));
     }
 
+    public void waitForElementPresentAllert(){
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(
+                readFromConfig("config.properties","timeout"))));
+        wait.until(ExpectedConditions.alertIsPresent());
+    }
+
 
     public void sleep(int seconds){
         try {

@@ -43,7 +43,7 @@ public class CarkifelekPage extends BaseClass {
     }
 
     public void clickOnCarkifelek(){
-        functionLibrary.waitForElementPresent(buttonCakirCevir);
+        functionLibrary.waitForElementPresentClick(buttonCakirCevir);
         buttonCakirCevir.click();
 
     }
@@ -61,9 +61,12 @@ public class CarkifelekPage extends BaseClass {
 
     }
     public void goToDashboard(){
+
+
         functionLibrary.waitForElementPresent(closeCakiFelek);
         closeCakiFelek.click();
     }
+
     public boolean verifyDashBoardPageOpened(){
         functionLibrary.waitForElementPresent(labelLee);
         return labelLee.isDisplayed();

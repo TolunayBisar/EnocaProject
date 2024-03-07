@@ -2,6 +2,7 @@ package com.enoca.ecommercetest.page;
 
 import com.enoca.ecommercetest.utility.BaseClass;
 import com.enoca.ecommercetest.utility.FunctionLibrary;
+import com.enoca.ecommercetest.utility.ScreenShotUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -87,6 +88,8 @@ WebElement uyariMsg;
         inputPromosyonKod.sendKeys(functionLibrary.timeStamp());
         functionLibrary.waitForElementPresentClick(buttonUygula);
         buttonUygula.click();
+        functionLibrary.waitForElementPresent(hataMsg);
+        ScreenShotUtility.takeScreenshot("hataliMesaj");
         String hataliMsg= hataMsg.getText();
         System.out.println(hataliMsg);
         functionLibrary.waitForElementPresentClick(buttonSatinAl);
@@ -125,6 +128,7 @@ WebElement uyariMsg;
         functionLibrary.waitForElementPresentClick(buttonSiparişTamamla);
 buttonSiparişTamamla.click();
 functionLibrary.waitForElementPresent(uyariMsg);
+ScreenShotUtility.takeScreenshot("uyariMesaj");
 String uyari = uyariMsg.getText();
         System.out.println(uyari);
 

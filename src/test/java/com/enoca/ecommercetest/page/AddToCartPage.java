@@ -35,8 +35,8 @@ public class AddToCartPage extends BaseClass {
     @FindBy(xpath = "//span[text()=\"Stoğa Gelince Haber Ver\"]")
     WebElement buttonStogaGelinceHaberVer;
 
-   @FindAll(@FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]"))
-    List<WebElement> buttonSepetEkle;
+   @FindBy(xpath = "//button[@class=\"add-to-cart-button cl-big-button\"]")
+    WebElement buttonSepetEkle;
 
     @FindBy(xpath = "//div[@id=\"cl-fancy-added-to-cart\"]/div[@onclick=\"javascript:location.href='/cart'\"]")
     WebElement buttonSepetGit;
@@ -48,6 +48,9 @@ public class AddToCartPage extends BaseClass {
     WebElement itemInSepetEkle;
     @FindBy(xpath = "//p[@class=\"cl-product-price\"]/span")
     WebElement priceInSepetEkle;
+
+    @FindBy(xpath = "//div[text()=\"KOPYALA\"]")
+            WebElement buttonIndirimKod;
 
 
 
@@ -77,19 +80,21 @@ public class AddToCartPage extends BaseClass {
         functionLibrary.waitForElementPresentClick(dropDownBedensec);
         //dropDownBedensec.click();
         //actions.click(dropDownBedensec);
-        functionLibrary.javaScripClick(dropDownBedensec);
-        Select select1= new Select(dropDownBedensec);
+
         for (int i=random.nextInt(listBeden.size());i>0&&i< listBeden.size();i++)
          {
-//             if (listBeden.get(i).getText().contains("Stoğa Gelince Haber Ver")) {
-//                 continue;
-//             }
+             functionLibrary.javaScripClick(dropDownBedensec);
+             Select select1= new Select(dropDownBedensec);
+
 
          // functionLibrary.waitForElementPresent(listBeden.get(i));
              System.out.println(i);
              select1.selectByIndex(i);
-             if (buttonSepetEkle.size()>0)
-                 break;
+             if (buttonStogaGelinceHaberVer.isDisplayed()) {
+                 continue;
+             }
+             if (buttonSepetEkle.isDisplayed()){
+                 break;}
 
 
 
@@ -97,13 +102,15 @@ public class AddToCartPage extends BaseClass {
 
          itemNameInSepetEkle = itemInSepetEkle.getText();
          itemPriceInSepetEkle = priceInSepetEkle.getText();
-        functionLibrary.waitForElementPresentClick(buttonSepetEkle.get(0));
+        functionLibrary.waitForElementPresentClick(buttonSepetEkle);
 
         //buttonSepetEkle.click();
         //actions.click(buttonSepetEkle);
-        functionLibrary.javaScripClick(buttonSepetEkle.get(0));
+        functionLibrary.javaScripClick(buttonSepetEkle);
         functionLibrary.waitForElementPresentClick(buttonSepetGit);
         buttonSepetGit.click();
+        functionLibrary.waitForElementPresentClick(buttonIndirimKod);
+        buttonIndirimKod.click();
 
     }
     public boolean verifyAddToCart(){
