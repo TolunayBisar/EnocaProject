@@ -60,7 +60,7 @@ public class CarkifelekPage extends BaseClass {
         return buttonKopyalandi.isDisplayed();
 
     }
-    public void goToDashboard(){
+    public void closeCarkifelek(){
 
 
         functionLibrary.waitForElementPresent(closeCakiFelek);

@@ -26,9 +26,9 @@ public class UIStepdefs extends BaseClass {
     @Given("User login and on dashboard page")
     public void userLoginAndOnDashboardPage() {
         dashBoardPage.closeCookie();
-        carkifelekPage.clickOnCarkifelek();
-        carkifelekPage.getDiscountCode();
-        carkifelekPage.goToDashboard();
+//        carkifelekPage.clickOnCarkifelek();
+//        carkifelekPage.getDiscountCode();
+        //carkifelekPage.closeCarkifelek();
         dashBoardPage.openHesabim();
         loginPage.logIn();
         loginPage.verifyLogin();

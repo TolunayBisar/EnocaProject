@@ -3,11 +3,9 @@ package com.enoca.ecommercetest.regressiontest;
 import com.enoca.ecommercetest.page.*;
 import com.enoca.ecommercetest.utility.BaseClass;
 import com.enoca.ecommercetest.utility.FunctionLibrary;
-import com.enoca.ecommercetest.utility.TestResultListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /**
@@ -52,7 +50,7 @@ public class UITestRunner extends BaseClass {
     }
     @Test(priority = 2 )
     public void openDashboard(){
-        carkifelekPage.goToDashboard();
+        carkifelekPage.closeCarkifelek();
     }
 
     @Test(priority = 3)

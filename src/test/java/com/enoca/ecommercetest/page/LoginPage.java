@@ -41,6 +41,7 @@ public class LoginPage extends BaseClass {
         functionLibrary.waitForElementPresentClick(buttonGirisYap);
         //buttonGirisYap.click();
         functionLibrary.javaScripClick(buttonGirisYap);
+        System.out.println("login successfully");
 
     }
     public boolean verifyLogin(){
